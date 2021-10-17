@@ -1,9 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
-import { coordinatesOfWorkplaces } from "./Coordinates";
+import { coordinatesOfWorkplaces, availablePlaces } from "./Coordinates";
 import { useSelector, useDispatch } from "react-redux";
 import { setWorkplace } from "../../redux/actions/place";
+import ReservationMenu from "./ReservationMenu";
 import Places from "./Places";
-import classes from "./BookMySeats.module.css";
+import Card from "@material-ui/core/Card";
 
 const Workplace = () => {
   const dispatch = useDispatch();
@@ -14,12 +15,7 @@ const Workplace = () => {
     dispatch(setWorkplace(index));
   };
 
-  const [availableSeats, setAvailableSeats] = useState([
-    "1A",
-    "1B",
-    "1D",
-    "2A",
-  ]);
+  const [availableSeats, setAvailableSeats] = useState(availablePlaces);
   const [bookedSeats, setBookedSeats] = useState([]);
   const [bookedStatus, setBookedStatus] = useState("");
   const addSeat = (ev) => {
@@ -43,10 +39,10 @@ const Workplace = () => {
   };
 
   const confirmBooking = () => {
-    setBookedStatus("You have successfully booked the following seats:");
+    setBookedStatus("You have successfully booked your palce:");
     bookedSeats.forEach((seat) => {
       setBookedStatus((prevState) => {
-        return prevState + seat + " ";
+        return prevState + seat + " !";
       });
     });
     const newAvailableSeats = availableSeats.filter(
@@ -60,39 +56,39 @@ const Workplace = () => {
 
   return (
     <React.Fragment>
-      <div style={{}}>
-        <p>How many seats would you like to book?</p>
-        <input
-          value={numberOfSeats}
-          onChange={(ev) => setNumberOfSeats(ev.target.value)}
-        />
-        <div style={{ padding: 20 }}>
-          <div
-            style={{
-              display: "inline-block",
-              // border: "2px solid red",
-              width: 1000,
-              height: 500,
-              backgroundImage:
-                "url(https://www.arstelle-office.ru/public/userfiles/images/planirovka_ofisa_arstelle_office_01.png)",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "contain",
-              backgroundPosition: "center",
-              position: "relative",
-            }}
-          >
-            <Places
-              // placeWork={coordinatesOfWorkplaces}
-              // onClickWorkplace={onSelectWorkplace}
-              values={coordinatesOfWorkplaces}
-              availableSeats={availableSeats}
-              bookedSeats={bookedSeats}
-              addSeat={addSeat}
-            />
-          </div>
-        </div>
-        <button onClick={confirmBooking}>Book seats</button>
-        <p>{bookedStatus}</p>
+      <div style={{ paddingLeft: "7vw", paddingTop: "20px" }}>
+        <Card
+          style={{
+            display: "inline-block",
+            // border: "2px solid red",
+            width: 1000,
+            height: 500,
+            backgroundImage:
+              "url(https://www.arstelle-office.ru/public/userfiles/images/planirovka_ofisa_arstelle_office_01.png)",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "contain",
+            backgroundPosition: "center",
+            position: "relative",
+            boxShadow: "0 0 10px rgba(0,0,0,0.5)",
+            padding: "10px",
+          }}
+        >
+          <ReservationMenu
+            numberOfSeats={numberOfSeats}
+            onChange={(ev) => setNumberOfSeats(ev.target.value)}
+            onClickBooking={confirmBooking}
+            bookedStatus={bookedStatus}
+            seatName={bookedSeats}
+          />
+          <Places
+            // placeWork={coordinatesOfWorkplaces}
+            // onClickWorkplace={onSelectWorkplace}
+            values={coordinatesOfWorkplaces}
+            availableSeats={availableSeats}
+            bookedSeats={bookedSeats}
+            addSeat={addSeat}
+          />
+        </Card>
       </div>
     </React.Fragment>
   );

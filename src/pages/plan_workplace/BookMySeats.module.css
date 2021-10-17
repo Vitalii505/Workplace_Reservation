@@ -1,12 +1,16 @@
-/* .section {
-    margin-top: 20px;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+/* 
+.plan_Workplace {
+  display: inline-block;
+  border: 2px solid red;
+  width: 1000;
+  height: 500;
+  background-image: url(https://www.arstelle-office.ru/public/userfiles/images/planirovka_ofisa_arstelle_office_01.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  position: relative;
 } */
 
-.section > div {
-  /* border: 1px solid black; */
-}
 .section > div:hover {
   cursor: pointer;
 }
@@ -18,9 +22,6 @@
   box-shadow: 0px 0px 70px -4px rgba(197, 48, 48, 0.26) inset;
 }
 .booked {
-  /* -moz-box-shadow: 20px 0 20px rgb(240, 237, 230);
-  -webkit-box-shadow: 20px 0 20px rgb(253, 251, 251); */
-  /* box-shadow: 0 0 20px rgb(247, 244, 244) !important; */
   -webkit-box-shadow: 0px 0px 70px 13px rgba(46, 206, 79, 0.26) inset;
   -moz-box-shadow: 0px 0px 70px 13px rgba(46, 206, 79, 0.26) inset;
   box-shadow: 0px 0px 70px 13px rgba(46, 206, 79, 0.26) inset;

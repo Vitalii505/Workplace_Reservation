@@ -15,6 +15,7 @@
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: 200%;
 }
+/*  */
 .form-control {
   width: 90%;
 }
@@ -41,6 +42,40 @@
 }
 .personIcon {
   margin-left: 20px;
-  /* padding: 0rem; */
 }
-
+.reservationMenuNumber {
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* border: solid 1px red; */
+  margin: 10px;
+  width: 400px;
+}
+.reservationMenuDate {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  /* border: solid 1px red; */
+  margin: 5px;
+  max-height: 180px;
+}
+.seatNameClick {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: rgb(33, 33, 151);
+  font-size: 80%;
+}
+.reservationMenuStatus {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* border: solid 1px red; */
+  margin: 10px;
+  width: 400px;
+  padding: 1%;
+  font-size: 70%;
+}
+.bookedStatusStyle {
+  font-size: 70%;
+  color: green;
+}

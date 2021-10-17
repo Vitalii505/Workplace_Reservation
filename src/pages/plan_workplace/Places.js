@@ -5,7 +5,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 
 const Places = ({ values, availableSeats, bookedSeats, addSeat }) => {
   return (
-    <div className={classes.section}>
+    <>
       {/* {placeWork.map((seat, index) => (
         <div
           onClick={() => onClickWorkplace(index)}
@@ -36,7 +36,7 @@ const Places = ({ values, availableSeats, bookedSeats, addSeat }) => {
           textTooltip = "Free place";
         }
         return (
-          <Tooltip title={textTooltip} placement="top">
+          <Tooltip title={`${seat.name} ${textTooltip}`} placement="top">
             <div
               className={seatClass}
               onClick={addSeat}
@@ -59,7 +59,7 @@ const Places = ({ values, availableSeats, bookedSeats, addSeat }) => {
           </Tooltip>
         );
       })}
-    </div>
+    </>
   );
 };
 
