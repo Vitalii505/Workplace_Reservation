@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Radio from "@material-ui/core/Radio";
@@ -35,7 +36,9 @@ const ReservationMenu = ({
   onClickBooking,
   bookedStatus,
   seatName,
-}) => {
+  handleChangeDate,
+  handleChangeTime,
+}) => {  
   const classes = useStyles();
   return (
     <>
@@ -77,9 +80,7 @@ const ReservationMenu = ({
               type="datetime-local"
               defaultValue="2021-10-15T09:30"
               className={classes.textField}
-              InputLabelProps={{
-                shrink: true,
-              }}
+              onChange={handleChangeDate}
             />
             <TextField
               id="time"
@@ -87,12 +88,7 @@ const ReservationMenu = ({
               type="time"
               defaultValue="07:30"
               className={classes.textFieldClock}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              inputProps={{
-                step: 300, // 5 min
-              }}
+              onChange={handleChangeTime}
             />
           </form>
           <Button

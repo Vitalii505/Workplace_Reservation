@@ -1,26 +1,19 @@
 import React from "react";
 import classes from "./BookMySeats.module.css";
-import Button from "@material-ui/core/Button";
+import { useSelector, useDispatch } from "react-redux";
 import Tooltip from "@material-ui/core/Tooltip";
+import { setCoordinates } from "../../redux/actions/place";
 
 const Places = ({ values, availableSeats, bookedSeats, addSeat }) => {
+  // const dispatch = useDispatch();
+  // const setIndicatorPlace = useSelector(
+  //   ({ placeSetIndicator }) => placeSetIndicator
+  // );
+  // const onSelectSeats = (coorY, coorX) => {
+  //   dispatch(setCoordinates(coorY, coorX));
+  // };
   return (
     <>
-      {/* {placeWork.map((seat, index) => (
-        <div
-          onClick={() => onClickWorkplace(index)}
-          style={{
-            top: seat.coorY,
-            left: seat.coorX,
-            border: "solid 2px yellow",
-            borderRadius: "50%",
-            width: "20px",
-            height: "20px",
-            position: "absolute",
-          }}
-        ></div>
-      ))} */}
-
       {values.map((seat) => {
         const isAvailable = availableSeats.includes(seat.name);
         const isBooked = bookedSeats.includes(seat.name);

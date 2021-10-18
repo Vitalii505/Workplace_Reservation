@@ -1,18 +1,21 @@
 import React, { useRef, useState, useEffect } from "react";
 import { coordinatesOfWorkplaces, availablePlaces } from "./Coordinates";
 import { useSelector, useDispatch } from "react-redux";
-import { setWorkplace } from "../../redux/actions/place";
+import { setSeats, setDataTimes } from "../../redux/actions/place";
 import ReservationMenu from "./ReservationMenu";
 import Places from "./Places";
 import Card from "@material-ui/core/Card";
 
 const Workplace = () => {
   const dispatch = useDispatch();
-  const indicatorWorkplace = useSelector(
-    ({ placeIndicator }) => placeIndicator
+  const setIndicatorPlace = useSelector(
+    ({ placeSetIndicator }) => placeSetIndicator
   );
-  const onSelectWorkplace = (index) => {
-    dispatch(setWorkplace(index));
+  const onSelectSeats = (seat) => {
+    dispatch(setSeats(seat));
+  };
+  const onSelectDataTimes = (dataT, time) => {
+    dispatch(setDataTimes(dataT, time));
   };
 
   const [availableSeats, setAvailableSeats] = useState(availablePlaces);
@@ -41,6 +44,8 @@ const Workplace = () => {
   const confirmBooking = () => {
     setBookedStatus("You have successfully booked your palce:");
     bookedSeats.forEach((seat) => {
+      onSelectSeats(seat);
+      onSelectDataTimes(dateTime, endTime);
       setBookedStatus((prevState) => {
         return prevState + seat + " !";
       });
@@ -53,6 +58,17 @@ const Workplace = () => {
     setNumberOfSeats(0);
   };
   const [numberOfSeats, setNumberOfSeats] = useState(0);
+
+  const [dateTime, setDateTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const handleChangeDate = (e) => {
+    const value = e.target.value;
+    setDateTime(value.trim());
+  };
+  const handleChangeTime = (e) => {
+    const value = e.target.value;
+    setEndTime(value.trim());
+  };
 
   return (
     <React.Fragment>
@@ -79,6 +95,8 @@ const Workplace = () => {
             onClickBooking={confirmBooking}
             bookedStatus={bookedStatus}
             seatName={bookedSeats}
+            handleChangeDate={handleChangeDate}
+            handleChangeTime={handleChangeTime}
           />
           <Places
             // placeWork={coordinatesOfWorkplaces}

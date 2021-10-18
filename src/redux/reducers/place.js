@@ -1,16 +1,26 @@
 const initialState = {
-  place: null,
-  isLoaded: false,
+  placeName: null,
+  dataTimes: {
+    DataAndTime: "2021-10-15T09:30",
+    EndTime: "07:30",
+  },
 };
 
-const placeIndicator = (state = initialState, action) => {
-  if (action.type === "SET_WORKPLACE") {
-    return {
-      ...state,
-      place: action.payload,
-    };
+const placeSetIndicator = (state = initialState, action) => {
+  switch (action.type) {
+    case "SET_SEATS":
+      return {
+        ...state,
+        placeName: action.payload,
+      };
+    case "SET_DATA":
+      return {
+        ...state,
+        dataTimes: action.payload,
+      };
+    default:
+      return state;
   }
-  return state;
 };
 
-export default placeIndicator;
+export default placeSetIndicator;
