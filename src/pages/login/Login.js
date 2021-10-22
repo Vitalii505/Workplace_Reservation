@@ -4,6 +4,8 @@ import { TextField } from "@material-ui/core";
 import { paths } from "../../constants";
 import { authApi } from "../../components/api";
 import { parseAccessToken } from "../../helpers";
+// import PersonIcon from "@material-ui/icons/Person";
+// import Box from "@material-ui/core/Box";
 
 const Login = ({ history, match }) => {
   const [email, setEmail] = useState("");

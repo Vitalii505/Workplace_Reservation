@@ -39,8 +39,8 @@ const Places = ({ values, availableSeats, bookedSeats, addSeat }) => {
                 left: seat.coorX,
                 // border: "solid 2px yellow",
                 borderRadius: "50%",
-                width: "20px",
-                height: "20px",
+                width: "23px",
+                height: "23px",
                 position: "absolute",
                 color: "white",
               }}

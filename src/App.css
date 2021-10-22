@@ -79,3 +79,12 @@
   font-size: 70%;
   color: green;
 }
+.reservstionBox {
+  padding: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+.textReserv {
+  font-size: 60%;
+  color: rgb(17, 17, 109);
+}

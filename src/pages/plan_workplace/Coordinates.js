@@ -117,8 +117,8 @@ export const coordinatesOfWorkplaces = [
   {
     id: 16,
     name: "1S",
-    coorY: "312px",
-    coorX: "576px",
+    coorY: "313px",
+    coorX: "577px",
   },
   {
     id: 17,
@@ -141,25 +141,25 @@ export const coordinatesOfWorkplaces = [
   {
     id: 20,
     name: "1W",
-    coorY: "335px",
+    coorY: "333px",
     coorX: "674px",
   },
   {
     id: 21,
     name: "1X",
     coorY: "329px",
-    coorX: "769px",
+    coorX: "768px",
   },
   {
     id: 22,
     name: "1Y",
     coorY: "337px",
-    coorX: "813px",
+    coorX: "812px",
   },
   {
     id: 23,
     name: "1Z",
     coorY: "347px",
-    coorX: "858px",
+    coorX: "856px",
   },
 ];

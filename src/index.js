@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux'
-import './index.css';
-import {App} from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import "./index.css";
+import { App } from "./App";
+import reportWebVitals from "./reportWebVitals";
 // import configureStore from './store'
 // const store = configureStore();
 
-import { store } from './redux/store'
-import {Router} from "react-router-dom";
-import {history} from "./libs/history";
+import { store } from "./redux/store";
+import { Router } from "react-router-dom";
+import { history } from "./libs/history";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,7 +19,7 @@ ReactDOM.render(
       </Provider>
     </Router>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

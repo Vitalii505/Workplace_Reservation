@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { coordinatesOfWorkplaces, availablePlaces } from "./Coordinates";
 import { useSelector, useDispatch } from "react-redux";
 import { setSeats, setDataTimes } from "../../redux/actions/place";
@@ -8,9 +8,7 @@ import Card from "@material-ui/core/Card";
 
 const Workplace = () => {
   const dispatch = useDispatch();
-  const setIndicatorPlace = useSelector(
-    ({ placeSetIndicator }) => placeSetIndicator
-  );
+
   const onSelectSeats = (seat) => {
     dispatch(setSeats(seat));
   };
