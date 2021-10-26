@@ -1,42 +1,76 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
+import {
+  coordinatesOfWorkplaces,
+  availablePlaces,
+} from "../../components/Coordinates";
+import { useSelector, useDispatch } from "react-redux";
+import BlockingPlaces from "./BlockingPlaces";
+import Card from "@material-ui/core/Card";
+import { setSeatsReserved } from "../../redux/actions/blockingPlaces";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
-const Workplaces = () => {
-  const [places, setPlaces] = useState([]);
+const Workplace = () => {
+  const dispatch = useDispatch();
+  const onSelectSeatsReserved = (seats) => {
+    dispatch(setSeatsReserved(seats));
+  };
+  const [availableSeats, setAvailableSeats] = useState(availablePlaces);
+  const [bookedSeats, setBookedSeats] = useState([]);
+  const [bookedStatus, setBookedStatus] = useState("");
 
-  const ref = useRef();
-
-  const handleClick = (e) => {
-    // Get the target
-    const target = e.target;
-
-    // Get the bounding rectangle of target
-    const rect = target.getBoundingClientRect();
-
-    // Mouse position
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    places.push({ x, y });
-    setPlaces([...places]);
+  const addSeat = (ev) => {
+    if (numberOfSeats && !ev.target.className.includes("disabled")) {
+      const seatsToBook = parseInt(numberOfSeats, 10);
+      if (bookedSeats.length <= seatsToBook) {
+        if (bookedSeats.includes(ev.target.innerText)) {
+          const newAvailable = bookedSeats.filter(
+            (seat) => seat !== ev.target.innerText
+          );
+          setBookedSeats(newAvailable);
+        } else if (bookedSeats.length < numberOfSeats) {
+          setBookedSeats([...bookedSeats, ev.target.innerText]);
+        } else if (bookedSeats.length === seatsToBook) {
+          bookedSeats.shift();
+          setBookedSeats([...bookedSeats, ev.target.innerText]);
+        }
+      }
+    }
   };
 
-  console.log([...places]);
+  const confirmBooking = () => {
+    setBookedStatus("You have successfully booked your palce:");
+    bookedSeats.forEach((seat) => {
+      console.log(availableSeats);
+      const setSEARS = (checkSeats) => {
+        checkSeats.splice(checkSeats.indexOf(seat), 1);
+        return checkSeats;
+      };
+      setAvailableSeats(setSEARS(availableSeats));
 
-  useEffect(() => {
-    ref.current.addEventListener("mousedown", handleClick);
-    return () => {
-      ref.current.removeEventListener("mousedown", handleClick);
-    };
-  }, [ref]);
+      setBookedStatus((prevState) => {
+        return prevState + seat + ", ";
+      });
+    });
+    const newAvailableSeats = availableSeats.filter(
+      (seat) => !bookedSeats.includes(seat)
+    );
+    localStorage.setItem("setavailableSeats", availableSeats);
+    onSelectSeatsReserved(availableSeats);
+    setAvailableSeats(newAvailableSeats);
+    setBookedSeats([]);
+    setNumberOfSeats("");
+  };
+  const [numberOfSeats, setNumberOfSeats] = useState("");
 
   return (
-    <div style={{}}>
-      <div style={{ padding: 20 }}>
-        <div
-          ref={ref}
+    <React.Fragment>
+      <div style={{ paddingLeft: "7vw", paddingTop: "20px" }}>
+        <Card
           style={{
             display: "inline-block",
-            border: "2px solid red",
+            // border: "2px solid red",
             width: 1000,
             height: 500,
             backgroundImage:
@@ -44,45 +78,41 @@ const Workplaces = () => {
             backgroundRepeat: "no-repeat",
             backgroundSize: "contain",
             backgroundPosition: "center",
-            // width: "100%",
-            // height: 500,
-            // border: "1px solid black",
             position: "relative",
+            boxShadow: "0 0 10px rgba(0,0,0,0.5)",
+            padding: "10px",
           }}
         >
-          {places && places.length
-            ? places.map((item) => (
-                <div
-                  style={{
-                    width: 7,
-                    height: 7,
-                    borderRadius: "50%",
-                    backgroundColor: "red",
-                    top: item.y,
-                    left: item.x,
-                    position: "absolute",
-                  }}
-                ></div>
-              ))
-            : null}
-
-          {[...places].map((coord) => (
-            <div
-              style={{
-                border: "solid 2px red",
-                borderRadius: "50%",
-                width: "20px",
-                height: "20px",
-                top: coord.y,
-                left: coord.x,
-                position: "absolute",
-              }}
-            ></div>
-          ))}
-        </div>
+          <BlockingPlaces
+            values={coordinatesOfWorkplaces}
+            availableSeats={availableSeats}
+            bookedSeats={bookedSeats}
+            addSeat={addSeat}
+          />
+          <Card className="reservationMenuNumber">
+            <TextField
+              id="outlined-basic"
+              label="Number of places to block"
+              variant="outlined"
+              value={numberOfSeats}
+              onChange={(ev) => setNumberOfSeats(ev.target.value)}
+              style={{ margin: "10px" }}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              disableElevation
+              onClick={confirmBooking}
+              style={{ marginTop: "20px" }}
+            >
+              Block places
+            </Button>
+          </Card>
+          <Typography color="secondary">{bookedStatus}</Typography>
+        </Card>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
-export default Workplaces;
+export default Workplace;

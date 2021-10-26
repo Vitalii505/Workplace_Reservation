@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import ComputerIcon from "@material-ui/icons/Computer";
@@ -29,45 +27,43 @@ const useStyles = makeStyles({
 
 const Reserved = () => {
   const classes = useStyles();
-  const { placeName, dataTimes } = useSelector(
-    (placeSetIndicator) => placeSetIndicator.places
-  );
-
-  console.log(placeName, dataTimes);
-  console.log(dataTimes.dataTime);
+  const placesList = useSelector((reservedPlace) => reservedPlace.placesList);
+  console.log("placesList-", placesList[0]);
 
   return (
     <>
-      <Card className="reservstionBox">
-        <Card className={classes.root}>
-          <Grid container justifyContent="space-between">
-            <Grid item style={{ margin: "13px" }}>
-              <ComputerIcon style={{ fontSize: "400%" }} />
+      {placesList.map((place) => (
+        <Card className="reservstionBox">
+          <Card className={classes.root}>
+            <Grid container justifyContent="space-between">
+              <Grid item style={{ margin: "13px" }}>
+                <ComputerIcon style={{ fontSize: "400%" }} />
+              </Grid>
+              <Grid item style={{ margin: "10px" }}>
+                <Typography variant="h5" component="h2">
+                  <span className="textReserv">times reservation: </span>
+                </Typography>
+                <Typography variant="h5" component="h2">
+                  <span className="textReserv">place reservation: </span>
+                </Typography>
+              </Grid>
+              <Grid item style={{ margin: "15px" }}>
+                <Typography variant="h5" component="h2">
+                  {`${place[0].dataAndTime.dateTime}-${place[0].dataAndTime.endTime}`}
+                </Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                  {place[0].seat}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Button color="secondary" style={{ margin: "30px" }}>
+                  delete
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item style={{ margin: "10px" }}>
-              <Typography variant="h5" component="h2">
-                <span className="textReserv">times reservation: </span>
-              </Typography>
-              <Typography variant="h5" component="h2">
-                <span className="textReserv">place reservation: </span>
-              </Typography>
-            </Grid>
-            <Grid item style={{ margin: "15px" }}>
-              <Typography variant="h5" component="h2">
-                {`${dataTimes.dataTime}-${dataTimes.time}`}
-              </Typography>
-              <Typography className={classes.pos} color="textSecondary">
-                {placeName}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Button color="secondary" style={{ margin: "30px" }}>
-                delete
-              </Button>
-            </Grid>
-          </Grid>
+          </Card>
         </Card>
-      </Card>
+      ))}
     </>
   );
 };

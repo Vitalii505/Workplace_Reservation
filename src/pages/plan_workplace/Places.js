@@ -1,17 +1,8 @@
 import React from "react";
 import classes from "./BookMySeats.module.css";
-import { useSelector, useDispatch } from "react-redux";
 import Tooltip from "@material-ui/core/Tooltip";
-import { setCoordinates } from "../../redux/actions/place";
 
 const Places = ({ values, availableSeats, bookedSeats, addSeat }) => {
-  // const dispatch = useDispatch();
-  // const setIndicatorPlace = useSelector(
-  //   ({ placeSetIndicator }) => placeSetIndicator
-  // );
-  // const onSelectSeats = (coorY, coorX) => {
-  //   dispatch(setCoordinates(coorY, coorX));
-  // };
   return (
     <>
       {values.map((seat) => {
@@ -46,8 +37,6 @@ const Places = ({ values, availableSeats, bookedSeats, addSeat }) => {
               }}
             >
               <span className={classes.seatsName}>{seat.name}</span>
-
-              {/* <Button style={{ fontSize: "40%" }}>top</Button> */}
             </div>
           </Tooltip>
         );

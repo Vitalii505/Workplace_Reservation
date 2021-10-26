@@ -4,8 +4,9 @@ import { TextField } from "@material-ui/core";
 import { paths } from "../../constants";
 import { authApi } from "../../components/api";
 import { parseAccessToken } from "../../helpers";
-// import PersonIcon from "@material-ui/icons/Person";
-// import Box from "@material-ui/core/Box";
+import Box from "@material-ui/core/Box";
+import PersonIcon from "@material-ui/icons/Person";
+import { Link } from "react-router-dom";
 
 const Login = ({ history, match }) => {
   const [email, setEmail] = useState("");
@@ -50,7 +51,7 @@ const Login = ({ history, match }) => {
           if (decodedPayload.role === "admin") {
             history.push(paths.admin.users());
           } else {
-            history.push(paths.user.reservation());
+            history.push(paths.user.plan());
           }
         } else {
           setLoginError("Server error");
@@ -64,11 +65,37 @@ const Login = ({ history, match }) => {
       });
   };
 
+  // function loginRole() {
+  //   let buttonRolelogin;
+  //   if (match.path.includes(paths.login())) {
+  //     return (buttonRolelogin = "Admin login");
+  //   } else {
+  //     return (buttonRolelogin = "User login");
+  //   }
+  // }
+
   return (
     <div>
       <div className="App-header">
         <h2 className="text-header">Workplace Reservation</h2>
       </div>
+      {/* 
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        flexDirection="column"
+        width="100px"
+        className="admin_box"
+      >
+        <PersonIcon className="personIcon" />
+        <Button
+          color="inherit"
+          className="buttonLogOut"
+          component={Link}
+          to={paths.loginAdmin()}
+        > </Button>
+      </Box> */}
+
       <form className="demoForm" style={{ width: "500px", margin: "auto" }}>
         <h2 className="textForm">Login</h2>
         <div className="form-group">

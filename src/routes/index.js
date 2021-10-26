@@ -12,13 +12,13 @@ export const routes = [
     path: paths.login(), // /login
     exact: true,
     component: Login
-  }, // /login
+  }, 
 
   {
     path: paths.loginAdmin(), // /login
     exact: true,
     component: Login
-  }, // /login
+  }, 
 
 
   // admin routes

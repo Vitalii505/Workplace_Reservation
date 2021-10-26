@@ -2,22 +2,21 @@
   color: #09d3ac;
 }
 
-.user-wrap{
-text-align: left;
-margin-right: 1%;
-margin-top: 5%;
+.user-wrap {
+  text-align: left;
+  margin-right: 1%;
 }
 
-ul{
+ul {
   list-style: none;
 }
 
-.creat-wrap{
+.creat-wrap {
   display: flex;
   justify-content: flex-end;
-  margin-bottom:7%;
+  margin-bottom: 7%;
 }
-.input-wrap{
+.input-wrap {
   display: flex;
   flex-direction: column;
 }
@@ -51,7 +50,8 @@ ul{
   outline: 0;
   border-color: #4a90e2;
 }
-.form-row input:focus+label, .form-row input:valid+label{
+.form-row input:focus + label,
+.form-row input:valid + label {
   transform: translateY(-60px);
   margin-left: -14px;
   font-size: 14px;
@@ -61,10 +61,10 @@ ul{
 }
 
 .creat {
-  margin: 0px auto!important;
+  margin: 0px auto !important;
 }
-.edit{
-  margin-right: 4px!important;
+.edit {
+  margin-right: 4px !important;
 }
 
 input {
@@ -72,7 +72,7 @@ input {
   padding: 0 1px;
   margin-right: 1px;
   line-height: 35px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background: none;
   border-width: 0;
   border-bottom: 2px solid transparent;
@@ -87,32 +87,30 @@ input:focus {
 }
 
 .button_return {
-  position: fixed!important;
+  position: fixed !important;
   top: 85%;
   left: 89.3%;
 }
 
 .MuiDialog-paperWidthSm {
-  max-width: 400px!important;
+  max-width: 400px !important;
   max-height: 310px;
 }
 
 .MuiDialog-scrollPaper {
   display: flex;
-  align-items: flex-start!important;
-  justify-content: flex-end!important;
+  align-items: flex-start !important;
+  justify-content: flex-end !important;
 }
 
 .MuiDialogContent-root:first-child {
-  padding-top: 1px!important;
+  padding-top: 1px !important;
 }
 
-
-.MuiTableCell-head{
-  width: 24.61%!important;
-
+.MuiTableCell-head {
+  width: 24.61% !important;
 }
 
 .MuiTableCell-root {
-  padding: 7px!important;
+  padding: 7px !important;
 }

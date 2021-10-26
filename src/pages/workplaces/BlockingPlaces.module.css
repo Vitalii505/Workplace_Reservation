@@ -1,0 +1,27 @@
+.section > div:hover {
+  cursor: pointer;
+}
+
+.disabled {
+  /* background-color: grey; */
+  -webkit-box-shadow: 0px 0px 70px -4px rgba(255, 0, 0, 0.596) inset;
+  -moz-box-shadow: 0px 0px 70px -4px rgba(250, 9, 9, 0.459) inset;
+  box-shadow: 0px 0px 70px -4px rgba(247, 3, 3, 0.411) inset;
+}
+.booked {
+  -webkit-box-shadow: 0px 0px 70px 13px rgba(20, 167, 20, 0.336) inset;
+  -moz-box-shadow: 0px 0px 70px 13px rgba(32, 173, 13, 0.377) inset;
+  box-shadow: 0px 0px 70px 13px rgba(14, 156, 9, 0.397) inset;
+}
+
+.section .disabled:hover {
+  cursor: not-allowed;
+}
+
+button {
+  margin-top: 10px;
+}
+
+.seatsName {
+  font-size: 1%;
+}

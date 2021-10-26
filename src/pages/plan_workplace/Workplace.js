@@ -1,13 +1,26 @@
 import React, { useState } from "react";
-import { coordinatesOfWorkplaces, availablePlaces } from "./Coordinates";
+import {
+  coordinatesOfWorkplaces,
+  availablePlaces,
+} from "../../components/Coordinates";
 import { useSelector, useDispatch } from "react-redux";
 import { setSeats, setDataTimes } from "../../redux/actions/place";
+import {
+  setSeatsReserved,
+  setObjReservation,
+} from "../../redux/actions/reservedPlace";
 import ReservationMenu from "./ReservationMenu";
 import Places from "./Places";
 import Card from "@material-ui/core/Card";
 
 const Workplace = () => {
   const dispatch = useDispatch();
+  // const { placeName, dataTimes } = useSelector(
+  //   (placeSetIndicator) => placeSetIndicator.places
+  // );
+  const freePlaces = useSelector(
+    (blockingPlaces) => blockingPlaces.blocking.freePlaces
+  );
 
   const onSelectSeats = (seat) => {
     dispatch(setSeats(seat));
@@ -16,11 +29,20 @@ const Workplace = () => {
     dispatch(setDataTimes(dataT, time));
   };
 
-  const [availableSeats, setAvailableSeats] = useState(availablePlaces);
+  const onSelectObjReservatins = (arrReservations) => {
+    dispatch(setObjReservation(arrReservations));
+  };
+  const documentData = localStorage.getItem("setavailableSeats");
+  const freeSeats = documentData.split(",");
+
+  const [availableSeats, setAvailableSeats] = useState(freeSeats);
   const [bookedSeats, setBookedSeats] = useState([]);
   const [bookedStatus, setBookedStatus] = useState("");
+  const [dateTime, setDateTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [reservationsList, setReservationsList] = useState([]);
+
   const addSeat = (ev) => {
-    console.log(numberOfSeats);
     if (numberOfSeats && !ev.target.className.includes("disabled")) {
       const seatsToBook = parseInt(numberOfSeats, 10);
       if (bookedSeats.length <= seatsToBook) {
@@ -44,6 +66,22 @@ const Workplace = () => {
     bookedSeats.forEach((seat) => {
       onSelectSeats(seat);
       onSelectDataTimes(dateTime, endTime);
+      const setSEARS = (checkSeats) => {
+        checkSeats.splice(checkSeats.indexOf(seat), 1);
+        return checkSeats;
+      };
+      setAvailableSeats(setSEARS(availableSeats));
+      localStorage.setItem("setavailableSeats", availableSeats);
+      console.log("ww--", availableSeats);
+
+      const dataAndTime = { dateTime, endTime };
+      const setPlacesList = (seats) => {
+        seats.push({ seat, dataAndTime });
+        return seats;
+      };
+      setReservationsList(setPlacesList(reservationsList));
+      console.log(reservationsList);
+
       setBookedStatus((prevState) => {
         return prevState + seat + " !";
       });
@@ -51,14 +89,13 @@ const Workplace = () => {
     const newAvailableSeats = availableSeats.filter(
       (seat) => !bookedSeats.includes(seat)
     );
+    onSelectObjReservatins(reservationsList);
     setAvailableSeats(newAvailableSeats);
     setBookedSeats([]);
     setNumberOfSeats(0);
   };
   const [numberOfSeats, setNumberOfSeats] = useState(0);
 
-  const [dateTime, setDateTime] = useState("");
-  const [endTime, setEndTime] = useState("");
   const handleChangeDate = (e) => {
     const value = e.target.value;
     setDateTime(value.trim());

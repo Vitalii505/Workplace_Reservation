@@ -4,10 +4,10 @@ import { paths } from '../constants';
 const setToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjI1ODYwMDE3fQ.Ho1aM4IvKY5W7Dd6zu2llZcK_aEKRo1KOjmp4bkHqRM'
 
 const instance = axios.create({
-    baseURL: 'https://workplace-api-1.herokuapp.com',
-    headers: {
-        Authorization: `Bearer ${setToken}`
-    }
+  baseURL: "https://workplace-api-2.herokuapp.com",
+  headers: {
+    Authorization: `Bearer ${setToken}`,
+  },
 });
 
 export const authApi = {
