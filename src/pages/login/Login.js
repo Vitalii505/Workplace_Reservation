@@ -4,9 +4,8 @@ import { TextField } from "@material-ui/core";
 import { paths } from "../../constants";
 import { authApi } from "../../components/api";
 import { parseAccessToken } from "../../helpers";
-import Box from "@material-ui/core/Box";
-import PersonIcon from "@material-ui/icons/Person";
-import { Link } from "react-router-dom";
+import CustomizedSwitches from "./authSwich";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Login = ({ history, match }) => {
   const [email, setEmail] = useState("");
@@ -65,36 +64,22 @@ const Login = ({ history, match }) => {
       });
   };
 
-  // function loginRole() {
-  //   let buttonRolelogin;
-  //   if (match.path.includes(paths.login())) {
-  //     return (buttonRolelogin = "Admin login");
-  //   } else {
-  //     return (buttonRolelogin = "User login");
-  //   }
-  // }
+  const loginRole = () => {
+    if (match.path === paths.login()) {
+      return history.push(paths.loginAdmin());
+    } else if (match.path === paths.loginAdmin()) {
+      return history.push(paths.login());
+    }
+  };
 
   return (
     <div>
       <div className="App-header">
         <h2 className="text-header">Workplace Reservation</h2>
       </div>
-      {/* 
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        flexDirection="column"
-        width="100px"
-        className="admin_box"
-      >
-        <PersonIcon className="personIcon" />
-        <Button
-          color="inherit"
-          className="buttonLogOut"
-          component={Link}
-          to={paths.loginAdmin()}
-        > </Button>
-      </Box> */}
+      <div className="buttonRoleLogin">
+        <CustomizedSwitches onClickRole={loginRole} />
+      </div>
 
       <form className="demoForm" style={{ width: "500px", margin: "auto" }}>
         <h2 className="textForm">Login</h2>
